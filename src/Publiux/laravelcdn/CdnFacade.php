@@ -109,7 +109,7 @@ class CdnFacade implements CdnFacadeInterface
         // if the package is surpassed, then return the same $path
         // to load the asset from the localhost
         if (isset($this->configurations['bypass']) && $this->configurations['bypass']) {
-            return Request::root().'/'.$path;
+            return Request::root().(!starts_with($path, '/') ? '/' : '').$path;
         }
 
         if (!isset($path)) {
