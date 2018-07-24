@@ -92,7 +92,7 @@ class CdnFacade implements CdnFacadeInterface
     public function asset($path)
     {
         // if asset always append the public/ dir to the path (since the user should not add public/ to asset)
-        return $this->generateUrl($path, 'public/');
+        return $this->generateUrl($path);
     }
 
     /**
@@ -149,10 +149,10 @@ class CdnFacade implements CdnFacadeInterface
             $manifest = json_decode(file_get_contents(public_path('mix-manifest.json')), true);
         }
         if (isset($manifest['/' . $path])) {
-            return $this->generateUrl($manifest['/' . $path], 'public/');
+            return $this->generateUrl($manifest['/' . $path]);
         }
         if (isset($manifest[$path])) {
-            return $this->generateUrl($manifest[$path], 'public/');
+            return $this->generateUrl($manifest[$path]);
         }
         throw new \InvalidArgumentException("File {$path} not defined in asset manifest.");
     }
